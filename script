@@ -1,0 +1,42 @@
+#!/bin/sh
+clear
+first(){
+    echo ""
+    echo "Use one of the following options:"
+    echo "d or D: Display today's date and present time"
+    echo "l or L: to see the listing of files in your present working directory"
+    echo "w or W: To see who's logged in"
+    echo "q or Q: To quit the program"
+    echo ""
+    echo "Enter your option and hit <Enter>: \c"
+    read option
+    echo ""
+}
+
+second(){
+if [ $option = "q" ] || [ $option = "Q" ]
+then
+    exit 1
+else    
+    case "$option" in
+	d|D) date
+     	     ;;
+	l|L) ls
+     	     ;;
+	w|W) who
+     	     ;;
+	*) echo "Invalid option: try again."
+	   first
+	   second
+	   ;;
+esac
+fi
+}
+
+while [ "$option" != "q" ]
+do
+    first
+    second
+done
+     
+exit 0
